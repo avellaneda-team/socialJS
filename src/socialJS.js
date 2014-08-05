@@ -24,7 +24,8 @@ SocialJS = (function () {
       pinterest: 'http://pinterest.com/pin/create/link/?url={{url}}&media={{media}}&description={{text}}',
       googleplus: 'https://plus.google.com/share?url={{url}}',
       blogger: 'https://www.blogger.com/blog-this.g?t&u={{url}}&n={{text}}',
-      delicious: 'https://delicious.com/save?v=5&provider={{provider}}&noui&jump=close&url={{url}}&title={{text}}'
+      delicious: 'https://delicious.com/save?v=5&provider={{provider}}&noui&jump=close&url={{url}}&title={{text}}',
+      googlebookmark: 'https://www.google.com/bookmarks/mark?op=add&bkmk={{url}}&title={{text}}&annotation='
     },
 
     options: {
