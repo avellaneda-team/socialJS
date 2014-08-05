@@ -23,12 +23,14 @@ SocialJS = (function () {
       linkedin: 'http://www.linkedin.com/shareArticle?mini=true&url={{url}}&title={{text}}&summary={{description}}&source={{source}}',
       pinterest: 'http://pinterest.com/pin/create/link/?url={{url}}&media={{media}}&description={{text}}',
       googleplus: 'https://plus.google.com/share?url={{url}}',
-      blogger: 'https://www.blogger.com/blog-this.g?t&u={{url}}&n={{text}}'
+      blogger: 'https://www.blogger.com/blog-this.g?t&u={{url}}&n={{text}}',
+      delicious: 'https://delicious.com/save?v=5&provider={{provider}}&noui&jump=close&url={{url}}&title={{text}}'
     },
 
     options: {
       url: window.location.href,
       text: window.document.title,
+      provider: window.document.title,
       description: document.querySelector('meta[name=description]').getAttribute('content'),
       source: window.location.href,
       media: document.querySelector('link[rel=icon]').getAttribute('href'),
