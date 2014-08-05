@@ -1,7 +1,8 @@
 SocialJS = (function () {
   "use strict";
 
-  function SocialJS() {
+  function SocialJS(options) {
+    if ('object' === typeof options) { this.extends(this.options, options); }
     var socialEls = this._socialEls;
     socialEls = document.querySelectorAll("[data-social-link=true], [social-link]");
 
@@ -25,8 +26,16 @@ SocialJS = (function () {
       url: window.location.href,
       text: window.document.title,
       popup: false,
+      shareOn: ''
+    },
+
+    popupConfig: {
       height: 600,
       width: 600,
+      menubar: 'no',
+      toolbar: 'no',
+      resizable: 'yes',
+      scrollbars: 'yes',
       left: function () {
         return (screen.width/2)-(this.width/2);
       },
@@ -46,13 +55,20 @@ SocialJS = (function () {
       return text;
     },
 
-    generateConfig: function (el) {
-      var config = this.options;
-      for( var option in el.dataset ) {
-        config[option] = el.dataset[option] || config[option];
+    extends: function (baseObject, newObject) {
+      var config = baseObject;
+      for( var option in baseObject ) {
+        config[option] = newObject[option] || config[option];
       }
-      console.log(config);
-      el.config = config;
+      return config;
+    },
+
+    generateConfig: function (el) {
+      el.config = this.extends(this.options, el.dataset);
+    },
+
+    generatePopupConfig: function (el) {
+      el.popupConfig = this.extends( this.popupConfig, el.dataset );
     },
 
     changeHref: function (el) {
@@ -64,10 +80,11 @@ SocialJS = (function () {
     bindPopUp: function (el) {
       var that = this;
       if ( el.config.popup ) {
+        this.generatePopupConfig( el );
         el.addEventListener('click', function(e) {
           e.preventDefault();
-          var properties = 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height={{height}}px,width={{width}}px,left={{left}}px,top={{top}}px';
-          window.open(this.href, '', that.templateEngine(properties, this.config) );
+          var properties = 'menubar={{menubar}},toolbar={{toolbar}},resizable={{resizable}},scrollbars={{scrollbars}},height={{height}}px,width={{width}}px,left={{left}}px,top={{top}}px';
+          window.open(this.href, '', that.templateEngine(properties, this.popupConfig) );
         });
       }
     }
