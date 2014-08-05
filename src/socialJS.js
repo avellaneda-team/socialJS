@@ -20,7 +20,8 @@ SocialJS = (function () {
     links: {
       facebook: 'https://www.facebook.com/sharer/sharer.php?u={{url}}',
       twitter: 'http://twitter.com/share?text={{text}}&url={{url}}',
-      linkedin: 'http://www.linkedin.com/shareArticle?mini=true&url={{url}}&title={{text}}&summary={{description}}&source={{source}}'
+      linkedin: 'http://www.linkedin.com/shareArticle?mini=true&url={{url}}&title={{text}}&summary={{description}}&source={{source}}',
+      pinterest: 'http://pinterest.com/pin/create/link/?url={{url}}&media={{media}}&description={{text}}'
     },
 
     options: {
@@ -28,6 +29,7 @@ SocialJS = (function () {
       text: window.document.title,
       description: document.querySelector('meta[name=description]').getAttribute('content'),
       source: window.location.href,
+      media: document.querySelector('link[rel=icon]').getAttribute('href'),
       popup: false,
       shareOn: ''
     },
