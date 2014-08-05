@@ -21,7 +21,8 @@ SocialJS = (function () {
       facebook: 'https://www.facebook.com/sharer/sharer.php?u={{url}}',
       twitter: 'http://twitter.com/share?text={{text}}&url={{url}}',
       linkedin: 'http://www.linkedin.com/shareArticle?mini=true&url={{url}}&title={{text}}&summary={{description}}&source={{source}}',
-      pinterest: 'http://pinterest.com/pin/create/link/?url={{url}}&media={{media}}&description={{text}}'
+      pinterest: 'http://pinterest.com/pin/create/link/?url={{url}}&media={{media}}&description={{text}}',
+      googleplus: 'https://plus.google.com/share?url={{url}}'
     },
 
     options: {
