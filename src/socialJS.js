@@ -19,12 +19,15 @@ SocialJS = (function () {
 
     links: {
       facebook: 'https://www.facebook.com/sharer/sharer.php?u={{url}}',
-      twitter: 'http://twitter.com/share?text={{text}}&url={{url}}'
+      twitter: 'http://twitter.com/share?text={{text}}&url={{url}}',
+      linkedin: 'http://www.linkedin.com/shareArticle?mini=true&url={{url}}&title={{text}}&summary={{description}}&source={{source}}'
     },
 
     options: {
       url: window.location.href,
       text: window.document.title,
+      description: document.querySelector('meta[name=description]').getAttribute('content'),
+      source: window.location.href,
       popup: false,
       shareOn: ''
     },
