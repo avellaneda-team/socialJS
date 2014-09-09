@@ -2,41 +2,79 @@ SocialJS = (function () {
   "use strict";
 
   function SocialJS(options) {
-    if ('object' === typeof options) { this.extends(this.options, options); }
-    var socialEls = this._socialEls;
-    socialEls = document.querySelectorAll("[data-social-link=true], [social-link]");
-
-    for (var i = 0; i < socialEls.length; i++) {
-      var el = socialEls[i];
-      this.generateConfig( el );
-      this.changeHref( el );
-      this.bindPopUp( el );
-    }
-  }
-
-  SocialJS.prototype = {
-    _socialEls: [],
-
-    links: {
-      facebook: 'https://www.facebook.com/sharer/sharer.php?u={{url}}',
-      twitter: 'http://twitter.com/share?text={{text}}&url={{url}}',
-      linkedin: 'http://www.linkedin.com/shareArticle?mini=true&url={{url}}&title={{text}}&summary={{description}}&source={{source}}',
-      pinterest: 'http://pinterest.com/pin/create/link/?url={{url}}&media={{media}}&description={{text}}',
-      googleplus: 'https://plus.google.com/share?url={{url}}',
-      blogger: 'https://www.blogger.com/blog-this.g?t&u={{url}}&n={{text}}',
-      delicious: 'https://delicious.com/save?v=5&provider={{provider}}&noui&jump=close&url={{url}}&title={{text}}',
-      googlebookmark: 'https://www.google.com/bookmarks/mark?op=add&bkmk={{url}}&title={{text}}&annotation='
-    },
-
-    options: {
+    var _options = {
       url: window.location.href,
       text: window.document.title,
       provider: window.document.title,
-      description: document.querySelector('meta[name=description]').getAttribute('content'),
+      description: document.querySelector('meta[name=description]') && document.querySelector('meta[name=description]').content,
       source: window.location.href,
-      media: document.querySelector('link[rel=icon]').getAttribute('href'),
+      media: document.querySelector('link[rel=icon]') && document.querySelector('link[rel=icon]').href,
       popup: false,
       shareOn: ''
+    },
+    _socialEls = [];
+
+    this.setOptions = function (options) {
+      if ('object' === typeof options) {
+        this.extends(_options, options);
+      }
+      return this;
+    };
+
+    this.getOptions = function () { return _options; };
+
+    this.fetchSocialEls = function () {
+      _socialEls = document.querySelectorAll("[data-social-link=true], [social-link]");
+      return this;
+    };
+
+    this.getSocialEls = function () {
+      return _socialEls;
+    };
+
+    this.countSocialEls = function () {
+      return _socialEls.length;
+    };
+
+    this.setOptions(options)
+        .fetchSocialEls();
+    /*
+    for (var i = 0; i < this._socialEls.length; i++) {
+      var el = this._socialEls[i];
+      this.generateConfig( el );
+      this.changeHref( el );
+      this.bindPopUp( el );
+      this.generateCounter( el );
+    }*/
+  }
+
+  SocialJS.prototype = {
+    social: {
+      facebook: {
+        url: 'https://www.facebook.com/sharer/sharer.php?u={{url}}',
+        shareCounter: 'share_count'
+      },
+      twitter: {
+        url: 'http://twitter.com/share?text={{text}}&url={{url}}',
+      },
+      linkedin: {
+        url: 'http://www.linkedin.com/shareArticle?mini=true&url={{url}}&title={{text}}&summary={{description}}&source={{source}}',
+      },
+      pinterest: {
+        url: 'http://pinterest.com/pin/create/link/?url={{url}}&media={{media}}&description={{text}}',
+      },
+      googleplus: {
+        url: 'https://plus.google.com/share?url={{url}}',
+      },
+      blogger: {
+        url: 'https://www.blogger.com/blog-this.g?t&u={{url}}&n={{text}}',
+      },
+      delicious: {
+        url: 'https://delicious.com/save?v=5&provider={{provider}}&noui&jump=close&url={{url}}&title={{text}}',
+      },
+      googlebookmark: {
+        url: 'https://www.google.com/bookmarks/mark?op=add&bkmk={{url}}&title={{text}}&annotation='
+      }
     },
 
     popupConfig: {
@@ -67,14 +105,14 @@ SocialJS = (function () {
 
     extends: function (baseObject, newObject) {
       var config = baseObject;
-      for( var option in baseObject ) {
-        config[option] = newObject[option] || config[option];
+      for( var option in newObject ) {
+        config[option] = newObject[option];
       }
       return config;
     },
 
     generateConfig: function (el) {
-      el.config = this.extends(this.options, el.dataset);
+      el.config = this.extends(this.getOptions(), el.dataset);
     },
 
     generatePopupConfig: function (el) {
@@ -82,7 +120,7 @@ SocialJS = (function () {
     },
 
     changeHref: function (el) {
-      var template = this.links[el.config.shareOn],
+      var template = this.social[el.config.shareOn].url,
           url      = this.templateEngine(template, el.config);
       el.setAttribute('href', url);
     },

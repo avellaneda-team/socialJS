@@ -13,7 +13,15 @@
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-jshint": "^0.10.0",
-    "grunt-contrib-watch": "^0.6.1"
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-html2js": "^0.2.8",
+    "grunt-karma": "^0.9.0",
+    "grunt-karma-coveralls": "^2.5.2",
+    "karma": "^0.12.23",
+    "karma-coverage": "^0.2.6",
+    "karma-html2js-preprocessor": "^0.1.0",
+    "karma-jasmine": "^0.1.5",
+    "karma-phantomjs-launcher": "^0.1.4",
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
