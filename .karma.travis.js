@@ -44,10 +44,10 @@ module.exports = function(config) {
 
     logLevel: config.LOG_INFO,
 
-    autoWatch: true,
+    autoWatch: false,
 
     browsers: ['PhantomJS'],
 
-    singleRun: false
+    singleRun: true
   });
 };
