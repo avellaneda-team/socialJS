@@ -1,4 +1,4 @@
-SocialJS = (function () {
+var SocialJS = (function () {
   "use strict";
 
   function SocialJS(options) {
