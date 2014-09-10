@@ -5,6 +5,22 @@ describe('SocialJS', function () {
       templateEngine = new SocialJS().templateEngine
   ;
 
+  describe('#init', function () {
+    it('should initialize the library', function () {
+      var anchor;
+      loadBody('test/fixtures/social_link.html');
+      socialJS = new SocialJS({
+        url: 'localhost',
+        text: 'LocalHost'
+      });
+      socialJS.init();
+      anchor = document.querySelectorAll("[data-social-link=true], [social-link]")[0];
+      expect( anchor.href ).toMatch('twitter');
+      expect( anchor.href ).toMatch('LocalHost');
+      expect( anchor.href ).toMatch('localhost');
+    })
+  });
+
   context('Options', function (){
     describe('#constructor', function () {
       it('set new options', function(){
@@ -95,7 +111,24 @@ describe('SocialJS', function () {
         el.setAttribute('href', '#');
         socialJS.generateConfig(el);
         socialJS.changeHref(el);
-        expect(el.href).toEqual('https://www.facebook.com/sharer/sharer.php?u=localhost');
+        expect(el.href).toMatch('facebook');
+        expect(el.href).toMatch('localhost');
+      });
+    });
+
+    describe('#bindPopUp', function () {
+      it('should config popup', function () {
+        loadBody('test/fixtures/popup_links.html');
+        var anchor;
+
+        socialJS = new SocialJS();
+        anchor = document.getElementsByTagName('a').item(0);
+        socialJS.generateConfig(anchor);
+        socialJS.changeHref(anchor);
+        socialJS.bindPopUp(anchor);
+        expect(anchor.config.popup).toBeTruthy();
+        expect(anchor.popupConfig).toBeDefined();
+
       });
     })
   });

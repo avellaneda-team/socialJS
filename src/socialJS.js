@@ -36,23 +36,30 @@ SocialJS = (function () {
       return _socialEls.length;
     };
 
+    this.init = function () {
+      console.log('Initialize SocialJS');
+      var el,
+          els = this.getSocialEls()
+      ;
+      for (var i = 0; i < this.countSocialEls(); i++) {
+        el = els[i];
+        this.generateConfig( el );
+        this.changeHref( el );
+        this.bindPopUp( el );
+      }
+
+      return this;
+    };
+
     this.setOptions(options)
         .fetchSocialEls();
-    /*
-    for (var i = 0; i < this._socialEls.length; i++) {
-      var el = this._socialEls[i];
-      this.generateConfig( el );
-      this.changeHref( el );
-      this.bindPopUp( el );
-      this.generateCounter( el );
-    }*/
+
   }
 
   SocialJS.prototype = {
     social: {
       facebook: {
         url: 'https://www.facebook.com/sharer/sharer.php?u={{url}}',
-        shareCounter: 'share_count'
       },
       twitter: {
         url: 'http://twitter.com/share?text={{text}}&url={{url}}',
