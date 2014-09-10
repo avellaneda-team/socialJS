@@ -1,4 +1,4 @@
-SocialJS
+SocialJS [![Build Status](https://travis-ci.org/ezekielriva/socialJS.svg?branch=master)](https://travis-ci.org/ezekielriva/socialJS)
 ========
 
 Social Links generators, without dependencies.
