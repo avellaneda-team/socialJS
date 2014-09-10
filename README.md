@@ -39,6 +39,7 @@ Intance it following the next code:
 
 ```
 var socialJS = new SocialJS();
+socialJS.init();
 ```
 
 Create a tag following the next template:
