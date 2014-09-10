@@ -1,4 +1,4 @@
-SocialJS [![Build Status](https://travis-ci.org/ezekielriva/socialJS.svg?branch=master)](https://travis-ci.org/ezekielriva/socialJS)
+SocialJS [![Build Status](https://travis-ci.org/ezekielriva/socialJS.svg?branch=master)](https://travis-ci.org/ezekielriva/socialJS) [![Code Climate](https://codeclimate.com/github/ezekielriva/socialJS/badges/gpa.svg)](https://codeclimate.com/github/ezekielriva/socialJS) [![Test Coverage](https://codeclimate.com/github/ezekielriva/socialJS/badges/coverage.svg)](https://codeclimate.com/github/ezekielriva/socialJS)
 ========
 
 Social Links generators, without dependencies.
