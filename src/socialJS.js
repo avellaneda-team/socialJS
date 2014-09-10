@@ -102,10 +102,12 @@ SocialJS = (function () {
     templateEngine: function (template, data) {
       var text = template;
       for (var attribute in data) {
-        var expression = new RegExp('{{' + attribute + '}}', 'g');
-        var replace = ('function' === typeof data[attribute]) ?
-          data[attribute]() : data[attribute];
-        text = text.replace(expression, encodeURIComponent(replace) );
+        if (data.hasOwnProperty(attribute)) {
+          var expression = new RegExp('{{' + attribute + '}}', 'g');
+          var replace = ('function' === typeof data[attribute]) ?
+            data[attribute]() : data[attribute];
+          text = text.replace(expression, encodeURIComponent(replace) );
+        }
       }
       return text;
     },
@@ -113,7 +115,9 @@ SocialJS = (function () {
     extends: function (baseObject, newObject) {
       var config = baseObject;
       for( var option in newObject ) {
-        config[option] = newObject[option];
+        if (newObject.hasOwnProperty(option)) {
+          config[option] = newObject[option];
+        }
       }
       return config;
     },
